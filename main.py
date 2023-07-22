@@ -12,7 +12,6 @@ projectfolder_path = r"path to projects folder here"
 
 
 def github_setup(username=username, password=password, reponame=reponame):
-
     service = Service(executable_path="chromedriver")
     options = ChromeOptions()
     options.add_argument("--start-maximized")
@@ -54,29 +53,28 @@ def github_setup(username=username, password=password, reponame=reponame):
 
     github_url = driver.current_url
     return github_url
-    
 
 
-def main(reponame = reponame, projectfolderpath = projectfolder_path):
+def main(reponame=reponame, projectfolderpath=projectfolder_path):
     projects_folder_path = projectfolderpath
 
     system("echo welcome")
     chdir(projects_folder_path)
-    system(f"mkdir \"{reponame}\"")
-    chdir(projectfolderpath+"/"+ f'{reponame}')
+    system(f'mkdir "{reponame}"')
+    chdir(projectfolderpath + "/" + f"{reponame}")
     system("git init")
     system("call>README.md")
     system("git add . ")
-    system("git commit -m \"Initial Commit\" ")
-    
+    system('git commit -m "Initial Commit" ')
+
     github_url = github_setup()
     print(github_url)
 
-    chdir(projectfolderpath+"/"+ f'{reponame}')
+    chdir(projectfolderpath + "/" + f"{reponame}")
     system(f"git remote add origin {github_url}.git")
     system("git push --all --set-upstream origin")
-
-    print("congratulations!! Repo successfully created....")    
+    system("code .")
+    print("congratulations!! Repo successfully created....")
 
 
 main()
